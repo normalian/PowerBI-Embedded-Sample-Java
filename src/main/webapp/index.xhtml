@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>PowerBI Embedded Test page for Java</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</h:head>
+<h:body>
+	<h:form>
+		<h2>You can view below reports. Please click a link.</h2>
+		<ul>
+			<ui:repeat var="report" value="#{indexAction.reports}">
+				<h:commandLink action="#{indexAction.goDetailPage(report.id)}"
+					value="#{report.name} - #{report.id}" />
+			</ui:repeat>
+		</ul>
+	</h:form>
+</h:body>
+</html>

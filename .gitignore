@@ -3,6 +3,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# pom generated files
+target/classes/
+
 # Package Files #
 *.jar
 *.war
