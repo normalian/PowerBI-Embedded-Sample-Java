@@ -9,26 +9,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </h:head>
 <h:body>
-	<h2>PowerBI Embedded Report detail page</h2>
-	<h:link outcome="/index.xhtml">back report list page.</h:link>
-	<div id="divView">
-		<iframe id="ifrTile" width="100%" height="400"></iframe>
-	</div>
-	<script>
-		(function() {
-			var iframe = document.getElementById('ifrTile');
-			iframe.src = 'https://embedded.powerbi.com/appTokenReportEmbed?reportId=${viewDto.reportId}';
-			iframe.onload = function() {
-				var msgJson = {
-					action : "loadReport",
-					accessToken : "${viewDto.appToken}",
-					height : 500,
-					width : 722
+	<h:form>
+		<h2>PowerBI Embedded Report detail page</h2>
+		<h:link outcome="/index.xhtml">back report list page.</h:link>
+		<div id="divView">
+			<iframe id="ifrTile" width="100%" height="400"></iframe>
+		</div>
+		<script>
+			(function() {
+				var iframe = document.getElementById('ifrTile');
+				iframe.src = 'https://embedded.powerbi.com/appTokenReportEmbed?reportId=${viewDto.reportId}';
+				iframe.onload = function() {
+					var msgJson = {
+						action : "loadReport",
+						accessToken : "${viewDto.appToken}",
+						height : 500,
+						width : 722
+					};
+					var msgTxt = JSON.stringify(msgJson);
+					iframe.contentWindow.postMessage(msgTxt, "*");
 				};
-				var msgTxt = JSON.stringify(msgJson);
-				iframe.contentWindow.postMessage(msgTxt, "*");
-			};
-		}());
-	</script>
+			}());
+		</script>
+	</h:form>
 </h:body>
 </html>

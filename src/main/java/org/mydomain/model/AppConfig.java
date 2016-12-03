@@ -1,6 +1,8 @@
 package org.mydomain.model;
 
 import java.io.Serializable;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -15,6 +17,23 @@ public class AppConfig implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		ResourceBundle resources = ResourceBundle.getBundle("powerbiembedded");
+		try {
+			workspaceid = resources.getString("WORKSPACE_ID");
+		} catch (MissingResourceException e) {
+			throw new RuntimeException("WORKSPACE_ID is wrong. Please input value at powerbiembedde.properties", e);
+		}
+		try {
+			workspaceCollectionName = resources.getString("WORKSPACE_COLLECTION_NAME");
+		} catch (MissingResourceException e) {
+			throw new RuntimeException(
+					"WORKSPACE_COLLECTION_NAME is wrong. Please input value at powerbiembedde.properties", e);
+		}
+		try {
+			accessToken = resources.getString("ACCESSTOKEN");
+		} catch (MissingResourceException e) {
+			throw new RuntimeException("ACCESSTOKEN is wrong. Please input value at powerbiembedde.properties", e);
+		}
 	}
 
 	public String getWorkspaceid() {
